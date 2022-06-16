@@ -9,7 +9,7 @@ import {
   convertAttributeValue
 } from './utils.js'
 
-export default function wrap (Vue, Component) {
+export default function wrap (Vue, Component, styleElement) {
   const isAsync = typeof Component === 'function' && !Component.cid
   let isInitialized = false
   let hyphenatedPropsList
@@ -161,6 +161,7 @@ export default function wrap (Vue, Component) {
         ))
         wrapper.$mount()
         this.shadowRoot.appendChild(wrapper.$el)
+        this.shadowRoot.appendChild(styleElement)
       } else {
         callHooks(this.vueComponent, 'activated')
       }

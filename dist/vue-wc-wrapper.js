@@ -95,7 +95,7 @@ function getAttributes (node) {
   return res
 }
 
-function wrap (Vue, Component) {
+function wrap (Vue, Component, styleElement) {
   const isAsync = typeof Component === 'function' && !Component.cid;
   let isInitialized = false;
   let hyphenatedPropsList;
@@ -247,6 +247,7 @@ function wrap (Vue, Component) {
         ));
         wrapper.$mount();
         this.shadowRoot.appendChild(wrapper.$el);
+        this.shadowRoot.appendChild(styleElement);
       } else {
         callHooks(this.vueComponent, 'activated');
       }

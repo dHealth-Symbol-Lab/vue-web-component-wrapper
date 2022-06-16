@@ -1,4 +1,4 @@
-# @vue/web-component-wrapper [![CircleCI](https://circleci.com/gh/vuejs/vue-web-component-wrapper.svg?style=shield)](https://circleci.com/gh/vuejs/vue-web-component-wrapper)
+# dhealth-web-component-wrapper [![CircleCI](https://circleci.com/gh/vuejs/vue-web-component-wrapper.svg?style=shield)](https://circleci.com/gh/vuejs/vue-web-component-wrapper)
 
 > Wrap and register a Vue component as a custom element.
 
@@ -34,7 +34,11 @@ const Component = {
   // any component options
 }
 
-const CustomElement = wrap(Vue, Component)
+const styleElement = document.createElement("style");
+const styleContent = ".testClass { color: royalblue }"
+styleElement.innerHTML = styleContent;
+
+const CustomElement = wrap(Vue, Component, styleElement)
 
 window.customElements.define('my-element', CustomElement)
 ```
@@ -42,7 +46,7 @@ window.customElements.define('my-element', CustomElement)
 It works with async components as well - you can pass an async component factory function that returns a Promise, and the function will only be called when an instance of the custom element is created on the page:
 
 ``` js
-const CustomElement = wrap(Vue, () => import(`MyComponent.vue`))
+const CustomElement = wrap(Vue, () => import(`MyComponent.vue`), styleElement)
 
 window.customElements.define('my-element', CustomElement)
 ```
